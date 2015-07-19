@@ -25,8 +25,8 @@ so.
 ### ListIDClass Tool
 
 I thought to develop a small script which lists down all classes and
-id’s present in html files on single page. So I can easily refer whether
-certain class is used at other files or not. 
+id’s present in each html file. So I can easily refer whether
+certain class is used in other files or not. 
 
 **Uses**
 
