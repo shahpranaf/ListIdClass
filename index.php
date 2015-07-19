@@ -1,4 +1,4 @@
-<?php //error_reporting(0); 
+<?php error_reporting(0); 
 require('list.php');
 $list = new listIdClass() ; 
 ?>
@@ -30,29 +30,50 @@ $list = new listIdClass() ;
     </head>
     <body>
 
-      <div class="container">
+      <div class="container content">
         <h1 class="text-center">ListIdClass</h1>
         <form class="form-inline" role="form" enctype="multipart/form-data" method="post" action="">
+          <p>Please upload .zip of your code folder.</p>
           <div class="form-group">
-            <label>Choose a zip file to upload: <input class=".form-control" type="file" name="zip_file" /></label><br />
+            <input type="text" id="filename">
+            <span class="btn btn-default btn-file">
+              Browse <input id="upload" type="file" name="zip_file">
+            </span>            
           </div>
           <input class="btn btn-primary" type="submit" name="submit" value="Upload" />
+
+          
         </form><?php
 
         $zip_status = $list->upload_zip( $_FILES );
 
         if( $zip_status == '1' ){ ?>
-          <p class="msg success">Success !! Zip file uploaded successfully. </p><?php
+          <p class="msg alert alert-success">Success !! Zip file uploaded successfully. </p><?php
           $list->getIdClass( $_FILES["zip_file"]["name"] );
         }
-        if( $zip_status == '2') {?>
-          <p class="msg error">Error !! Please upload zip file only. </p><?php
-        }?>
+        elseif( $zip_status == '3') {?>
+          <p class="msg alert alert-danger">Error !! The file you are trying to upload is not a zip file. Please try again.</p><?php
+        }
+        else {?>
+          <p class="msg alert alert-danger">Error uploading file. Please try again. </p><?php
+        }?>        
         
       </div>
-      <footer>
-        <h5 class="bg-warning">This application is developed by Pranav Shah. Please note we do not store code file on our server.</h5>
+      <footer class="container">
+          <h5 class="alert alert-warning">This application is developed by Pranav Shah. Please note we do not store code file on our server.</h5>
       </footer>
+     
+
+      <script>
+        $('#upload').change(function() {
+            var filename = $(this).val();
+            var lastIndex = filename.lastIndexOf("\\");
+            if (lastIndex >= 0) {
+                filename = filename.substring(lastIndex + 1);
+            }
+            $('#filename').val(filename);
+        });
+      </script>
 
     </body>
     </html>
