@@ -16,8 +16,11 @@ class listIdClass {
         } 
       }
       
+      if (!file_exists('upload/'.$name[0])) {
+        mkdir('upload/'.$name[0], 0777, true);
+      }
       $target_path = "upload/".$filename;  // change this to the correct site path
-            
+
       $continue = strtolower($name[1]) == 'zip' ? true : false;
       if(!$continue) {
         $message = 3;
@@ -29,7 +32,7 @@ class listIdClass {
         $zip = new ZipArchive();
         $x = $zip->open($target_path);
         if ($x === true) {
-          $zip->extractTo("upload/"); // change this to the correct site path
+          $zip->extractTo('upload/'.$name[0]); // change this to the correct site path
           $zip->close();
           
           unlink($target_path);
@@ -46,7 +49,7 @@ class listIdClass {
   <div class="container"><?php
   $dir = 'upload/'.explode('.',$foldername)[0];
 
-  $files = $this->rsearch($dir,'/^.*\.html$/i'); ?>
+  $files = $this->rsearch($dir,'/^.*\.(?:html|php|tmpl|jsp|htm)$/i');?>
   <div class="row"><?php
 
   foreach ($files as $key => $filename) {

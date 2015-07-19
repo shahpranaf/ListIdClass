@@ -54,7 +54,7 @@ $list = new listIdClass() ;
         elseif( $zip_status == '3') {?>
           <p class="msg alert alert-danger">Error !! The file you are trying to upload is not a zip file. Please try again.</p><?php
         }
-        else {?>
+        elseif( $zip_status == '2') {?>
           <p class="msg alert alert-danger">Error uploading file. Please try again. </p><?php
         }?>        
         
