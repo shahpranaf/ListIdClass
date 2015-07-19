@@ -1,6 +1,6 @@
 ### Intro
 
-This tiny tool scans while code folder(zip) uploaded and lists id’s and
+This tiny tool scans whole code folder(zip) uploaded and lists id’s and
 classes used.
 
 Working url : [ListIdClass]
